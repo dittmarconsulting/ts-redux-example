@@ -6,10 +6,12 @@ import {
 import styled from 'styled-components/native';
 import { FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch, ActionCreatorsMapObject } from 'redux';
+import {ActionTypes} from '../../redux/types/actions';
 
 import { ActionCreator } from '../../redux/actions';
 import { IProduct } from '../../types/iProduct';
+import { IProductState } from '../../redux/types/reducers';
 
 const Container = styled(View)`
   flex: 1;
@@ -19,6 +21,7 @@ const Container = styled(View)`
 interface IProps {
   componentId: string;
   products: IProduct[];
+  fetchProducts: () => ActionTypes
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
@@ -35,11 +38,11 @@ export const ProductsView: NavigationFunctionComponent<IProps> = memo(
   },
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: {productState: IProductState}) => ({
   products: state.productState.products,
 });
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
     fetchProducts: action.fetchProducts,

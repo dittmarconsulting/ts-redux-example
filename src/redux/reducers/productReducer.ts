@@ -4,8 +4,8 @@ import { IStoreProducts, ISetSelectedProduct, ISetProductVariant, ActionTypes } 
 
 const initState: IProductState = {
   products: [],
-  selectedProduct: {},
-  selectedVariant: undefined,
+  selectedProduct: null,
+  selectedVariant: null,
   quantity: 0,
 };
 
@@ -32,10 +32,7 @@ export const productState = (
       case C.SET_QUANTITY_INCREMENT:
         return {
           ...state,
-          quantity:
-            state.quantity < state.selectedVariant?.maxOrderQuantity
-              ? state.quantity + 1
-              : state.quantity,
+          quantity: state.quantity < (!!state.selectedVariant && state.selectedVariant.maxOrderQuantity) ? state.quantity + 1 : state.quantity
         };
       case C.SET_QUANTITY_DECREMENT:
         return {

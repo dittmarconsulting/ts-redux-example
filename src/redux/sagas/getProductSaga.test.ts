@@ -3,6 +3,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { workerFetchProducts } from './getProductSaga';
 import * as Api from '../../utility/api';
 import { storeProducts } from '../actions/productActions';
+import { IProduct } from '../../types/iProduct';
 
 import { mockData } from '../../mockData';
 

@@ -7,8 +7,8 @@ export interface IAppState {
 
 export interface IProductState {
   readonly products: IProduct[];
-  readonly selectedProduct: {};
-  readonly selectedVariant?: IVariant | undefined;
+  readonly selectedProduct: IProduct | null;
+  readonly selectedVariant: IVariant | null;
   readonly quantity: number;
 }
 
