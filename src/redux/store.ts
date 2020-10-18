@@ -15,6 +15,12 @@ const reducer = storage.reducer(rootReducer);
 const engine = createEngine(storageKey);
 const engineMiddleware = storage.createMiddleware(engine);
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}): typeof compose;
+  }
+}
+
 // https://github.com/zalmoxisus/redux-devtools-extension
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -32,15 +38,14 @@ const store = createStore(reducer, {}, enhancer);
 sagaMiddleware.run(rootSaga);
 
 const load = storage.createLoader(engine);
-// load(store)
-//   .then(() => {
-//     store.dispatch({
-//       type: C.STORE_SYNCED,
-//       payload: true,
-//     });
-//   })
-//   .catch(() => {
-//     console.log('Failed to load previous state');
-//   });
+load(store)
+  .then(() => {
+    store.dispatch({
+      type: C.STORE_SYNCED,
+      payload: true,
+    });
+    return this;
+  })
+  .then( null, err => console.log('err: ', err));
 
 export default store;
