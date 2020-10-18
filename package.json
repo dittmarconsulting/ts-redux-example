@@ -54,7 +54,7 @@
     ],
     "automock": false,
     "setupFiles": [
-      "./src/setupTests.js"
+      "./setupTests"
     ]
   }
 }
