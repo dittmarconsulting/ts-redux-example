@@ -4,24 +4,29 @@ import {
   Navigation,
 } from 'react-native-navigation';
 import styled from 'styled-components/native';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, ListRenderItem } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch, ActionCreatorsMapObject } from 'redux';
-import {ActionTypes} from '../../redux/types/actions';
 
+import {
+  ActionTypes,
+  IFetchProducts,
+  ISetSelectedProduct,
+} from '../../redux/types/actions';
+import { colors } from '../../styles';
 import { ActionCreator } from '../../redux/actions';
 import { IProduct } from '../../types/iProduct';
 import { IProductState } from '../../redux/types/reducers';
+import { ProductCard } from '../../components/ProductCard';
 
-const Container = styled(View)`
-  flex: 1;
-  background-color: yellow;
+const StyledFlatList = styled(FlatList)`
+  background-color: ${colors.silver};
 `;
 
 interface IProps {
   componentId: string;
   products: IProduct[];
-  fetchProducts: () => ActionTypes
+  fetchProducts: () => IFetchProducts;
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
@@ -30,15 +35,28 @@ export const ProductsView: NavigationFunctionComponent<IProps> = memo(
       products.length === 0 && fetchProducts();
     }, [products.length, fetchProducts]);
 
-    useEffect(() => {
-      console.log(products);
-    }, [products]);
+    const handleOnProductPress = (product) => {
+      // setSelectedProduct(product);
+      // setup navigation
+    };
 
-    return <Container></Container>;
+    return (
+      <StyledFlatList
+        data={products}
+        renderItem={({ item }) => (
+          <ProductCard product={item} onProductPress={handleOnProductPress} />
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    );
   },
 );
 
-const mapStateToProps = (state: {productState: IProductState}) => ({
+/*
+
+*/
+
+const mapStateToProps = (state: { productState: IProductState }) => ({
   products: state.productState.products,
 });
 
@@ -46,7 +64,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
     fetchProducts: action.fetchProducts,
-    setSelectedProduct: action.setSelectedProduct,
   };
 };
 

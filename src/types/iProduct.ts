@@ -1,4 +1,4 @@
-import {IVariant} from './iVariant'
+import { IVariant } from './iVariant';
 
 export interface IProduct {
   id: string;

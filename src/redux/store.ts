@@ -46,6 +46,6 @@ load(store)
     });
     return this;
   })
-  .then( null, err => console.log('err: ', err));
+  .then(null, (err) => console.log('err: ', err));
 
 export default store;

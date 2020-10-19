@@ -1,0 +1,4 @@
+{
+	"eslint.alwaysShowStatus": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+}
