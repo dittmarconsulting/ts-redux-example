@@ -1,30 +1,31 @@
-import { getPrice } from './stringUtil';
+import { getPrice, IProductPriceProp } from './stringUtil';
 
 describe('Test the getPrice utility function', () => {
-  const mockProductWithSinglePrice = {
-    currencyCode: 'AUD',
+  const mockProductWithSinglePrice: IProductPriceProp = {
     currencySymbol: 'A$',
     priceRange: false,
+    maxPrice: 0,
+    minPrice: 0,
     unitPrice: 103,
   };
 
-  const mockProductWithPriceRange = {
-    currencyCode: 'AUD',
-    currencySymbol: 'A$',
+  const mockProductWithPriceRange: IProductPriceProp = {
     priceRange: true,
+    currencySymbol: 'A$',
     maxPrice: 61,
     minPrice: 30,
+    unitPrice: 0,
   };
 
   it('should display a single price', () => {
-    const priceString = getPrice(mockProductWithSinglePrice);
+    const priceString = getPrice(mockProductWithSinglePrice, undefined);
     const expectedString = '$ 103.00';
     expect(priceString).toEqual(expectedString);
   });
 
   it('should display a single range', () => {
-    const priceString = getPrice(mockProductWithPriceRange);
-    const expectedString = '$ 30.00 - A$ 61.00';
+    const priceString = getPrice(mockProductWithPriceRange, undefined);
+    const expectedString = '$ 30.00 - $ 61.00';
     expect(priceString).toEqual(expectedString);
   });
 
