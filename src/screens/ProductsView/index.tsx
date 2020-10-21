@@ -3,10 +3,9 @@ import {
   NavigationFunctionComponent,
   Navigation,
 } from 'react-native-navigation';
-import styled from 'styled-components/native';
-import { FlatList, View, ListRenderItem } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch, ActionCreatorsMapObject } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 
 import {
   ActionTypes,
@@ -19,42 +18,46 @@ import { IProduct } from '../../types/iProduct';
 import { IProductState } from '../../redux/types/reducers';
 import { ProductCard } from '../../components/ProductCard';
 
-const StyledFlatList = styled(FlatList)`
-  background-color: ${colors.silver};
-`;
+//https://github.com/styled-components/styled-components/issues/2955
 
 interface IProps {
   componentId: string;
   products: IProduct[];
   fetchProducts: () => IFetchProducts;
+  setSelectedProduct: (product: IProduct) => ISetSelectedProduct;
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, products, fetchProducts }) => {
+  ({ componentId, products, fetchProducts, setSelectedProduct }) => {
     useEffect(() => {
       products.length === 0 && fetchProducts();
     }, [products.length, fetchProducts]);
 
-    const handleOnProductPress = (product) => {
-      // setSelectedProduct(product);
-      // setup navigation
+    const handleOnProductPress = (product: IProduct) => {
+      setSelectedProduct(product);
+      Navigation.push(componentId, {
+        component: {
+          name: 'detail',
+        },
+      });
     };
 
     return (
-      <StyledFlatList
+      <FlatList
+        style={flatListStyle}
         data={products}
-        renderItem={({ item }) => (
+        renderItem={({ item }: { item: IProduct }) => (
           <ProductCard product={item} onProductPress={handleOnProductPress} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: IProduct) => item.id}
       />
     );
   },
 );
 
-/*
-
-*/
+// I tried to style the component with styled-components but ran into TS issues
+// https://stackoverflow.com/questions/64460114/rn-flatlist-with-typescript-and-styled-components
+const flatListStyle = { backgroundColor: colors.silver };
 
 const mapStateToProps = (state: { productState: IProductState }) => ({
   products: state.productState.products,
@@ -64,6 +67,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
     fetchProducts: action.fetchProducts,
+    setSelectedProduct: action.setSelectedProduct,
   };
 };
 
