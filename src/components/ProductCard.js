@@ -1,11 +1,11 @@
-import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import React, { FC } from 'react';
 import styled from 'styled-components/native';
 
 import { containerProps, colors } from '../styles';
 import { ProductDescription } from './ProductDescription';
+import { IProduct } from '../types/iProduct';
 
-const Container = styled(TouchableOpacity)`
+const Container = styled.TouchableOpacity`
   ${containerProps.row}
   background-color: ${colors.white};
   height: 150px;
@@ -14,7 +14,7 @@ const Container = styled(TouchableOpacity)`
   padding-right: 20px;
 `;
 
-const StyledImage = styled(Image)`
+const StyledImage = styled.Image`
   width: 100px;
   margin-right: 20px;
 `;
@@ -23,7 +23,15 @@ const resizeMode = {
   resizeMode: 'contain',
 };
 
-export const ProductCard = ({ product, onProductPress = () => {} }) => (
+interface IProps {
+  product: IProduct;
+  onProductPress: (product: IProduct) => void;
+}
+
+export const ProductCard: FC<IProps> = ({
+  product,
+  onProductPress = () => {},
+}) => (
   <Container onPress={() => onProductPress(product)}>
     <StyledImage
       style={resizeMode}
