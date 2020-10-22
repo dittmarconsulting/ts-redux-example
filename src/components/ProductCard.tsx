@@ -7,10 +7,11 @@ import { IProduct } from '../types/iProduct';
 
 const Container = styled.TouchableOpacity`
   ${containerProps.row}
+  ${containerProps.jCenter}
   background-color: ${colors.white};
   height: 150px;
   margin-top: 10px;
-  padding-left: 40px;
+  padding-left: 20px;
   padding-right: 20px;
 `;
 
@@ -18,10 +19,6 @@ const StyledImage = styled.Image`
   width: 100px;
   margin-right: 20px;
 `;
-
-const resizeMode = {
-  resizeMode: 'contain',
-};
 
 interface IProps {
   product: IProduct;
@@ -34,7 +31,7 @@ export const ProductCard: FC<IProps> = ({
 }) => (
   <Container onPress={() => onProductPress(product)}>
     <StyledImage
-      style={resizeMode}
+      resizeMode="contain"
       source={{
         uri: product?.image.url,
       }}
