@@ -1,5 +1,4 @@
 import React, { memo, useEffect } from 'react';
-import { ScrollView, Image } from 'react-native';
 import styled from 'styled-components/native';
 import {
   NavigationFunctionComponent,
@@ -8,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-import { containerProps, colors } from '../../styles';
+import { ContainerProps, Colors } from '../../styles';
 import {
   ActionTypes,
   IFetchProducts,
@@ -16,26 +15,44 @@ import {
 } from '../../redux/types/actions';
 import { ActionCreator } from '../../redux/actions';
 import { IProductState } from '../../redux/types/reducers';
+import { IProduct } from '../../types/iProduct';
+import { ProductDescription } from '../../components/ProductDescription';
+import { QuantityCounter } from '../../components/QuantityCounter';
 
-const Container = styled(ScrollView)`
-  ${containerProps.column}
-  ${containerProps.flex}
-  background-color: ${colors.white};
+const Container = styled.ScrollView`
+  ${ContainerProps.column}
+  ${ContainerProps.flex}
+  background-color: ${Colors.white};
   padding: 30px;
 `;
 
 interface IProps {
   componentId: string;
+  selectedProduct: IProduct;
 }
 
 const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId }) => {
-    return <Container></Container>;
+  ({ componentId, selectedProduct }) => {
+    return (
+      <Container>
+        <ProductDescription
+          isCentered
+          product={selectedProduct}
+          variantPrice={100}
+        />
+        <QuantityCounter
+          onIncrement={() => {}}
+          onDecrement={() => {}}
+          quantity={0}
+          maxQuantity={10}
+        />
+      </Container>
+    );
   },
 );
 
 const mapStateToProps = (state: { productState: IProductState }) => ({
-  products: state.productState.products,
+  selectedProduct: state?.productState.selectedProduct,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
