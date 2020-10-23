@@ -1,16 +1,10 @@
 import React, { FC, memo } from 'react';
-import {
-  TouchableOpacity,
-  View,
-  Image,
-  Text,
-  GestureResponderEvent,
-} from 'react-native';
 import styled from 'styled-components/native';
 
 import { ContainerProps, fontTypeProps, Colors } from '../styles';
+import { PressType } from '../types/componentTypes';
 
-const Container = styled(View)`
+const Container = styled.View`
   ${ContainerProps.row}
   background-color: ${Colors.white};
   height: 50px;
@@ -18,30 +12,24 @@ const Container = styled(View)`
   border-color: ${Colors.cursedGrey};
 `;
 
-const CounterContainer = styled(TouchableOpacity)`
+const CounterContainer = styled.TouchableOpacity`
   ${ContainerProps.center}
   width: 50px;
 `;
 
-const CounterTextContainer = styled(View)`
+const CounterTextContainer = styled.View`
   ${ContainerProps.flex}
   ${ContainerProps.center}
 `;
 
-const StyledCounterIcon = styled(Image)`
+const StyledCounterIcon = styled.Image`
   width: 25px;
   height: 25px;
 `;
 
-const QuantityText = styled(Text)`
+const QuantityText = styled.Text`
   ${fontTypeProps.body}
 `;
-
-const resizeMode = {
-  resizeMode: 'contain',
-};
-
-type PressType = (event: GestureResponderEvent) => void;
 
 interface IProps {
   onIncrement: Function;
@@ -68,7 +56,6 @@ export const QuantityCounter: FC<IProps> = memo(
               ? require('../assets/plus.png')
               : require('../assets/plus_grey.png')
           }
-          tintColor="red"
         />
       </CounterContainer>
       <CounterTextContainer>
