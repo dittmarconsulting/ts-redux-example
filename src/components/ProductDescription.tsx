@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 
-import { containerProps, fontTypeProps, colors } from '../styles';
+import { ContainerProps, fontTypeProps, Colors } from '../styles';
 import { getPrice } from '../utility/stringUtil';
 import { IProduct } from '../types/iProduct';
 
@@ -10,21 +10,21 @@ type StyledType = {
 };
 
 const TextContainer = styled.View<StyledType>`
-  ${containerProps.flexShrink}
-  ${containerProps.column}
-  ${containerProps.jCenter}
-	${(props) => props.isCentered && containerProps.aCenter}
+  ${ContainerProps.flexShrink}
+  ${ContainerProps.column}
+  ${ContainerProps.jCenter}
+	${(props) => props.isCentered && ContainerProps.aCenter}
 `;
 
 const ProductPriceText = styled.Text`
   ${fontTypeProps.body}
-  color: ${colors.charcoal};
+  color: ${Colors.charcoal};
   margin-bottom: 10px;
 `;
 
 const DetailText = styled.Text`
   ${fontTypeProps.detail}
-  color: ${colors.cursedGrey};
+  color: ${Colors.cursedGrey};
   margin-bottom: 10px;
 `;
 

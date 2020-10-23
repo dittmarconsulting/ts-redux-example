@@ -1,10 +1,10 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, ElementType } from 'react';
 import {
   NavigationFunctionComponent,
   Navigation,
 } from 'react-native-navigation';
-import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import {
@@ -12,13 +12,15 @@ import {
   IFetchProducts,
   ISetSelectedProduct,
 } from '../../redux/types/actions';
-import { colors } from '../../styles';
+import { Colors } from '../../styles';
 import { ActionCreator } from '../../redux/actions';
 import { IProduct } from '../../types/iProduct';
 import { IProductState } from '../../redux/types/reducers';
 import { ProductCard } from '../../components/ProductCard';
 
-//https://github.com/styled-components/styled-components/issues/2955
+const StyledFlatList = styled.FlatList`
+  background-color: ${Colors.silver};
+`;
 
 interface IProps {
   componentId: string;
@@ -43,8 +45,7 @@ export const ProductsView: NavigationFunctionComponent<IProps> = memo(
     };
 
     return (
-      <FlatList
-        style={flatListStyle}
+      <StyledFlatList<ElementType>
         data={products}
         renderItem={({ item }: { item: IProduct }) => (
           <ProductCard product={item} onProductPress={handleOnProductPress} />
@@ -54,10 +55,6 @@ export const ProductsView: NavigationFunctionComponent<IProps> = memo(
     );
   },
 );
-
-// I tried to style the component with styled-components but ran into TS issues
-// https://stackoverflow.com/questions/64460114/rn-flatlist-with-typescript-and-styled-components
-const flatListStyle = { backgroundColor: colors.silver };
 
 const mapStateToProps = (state: { productState: IProductState }) => ({
   products: state.productState.products,

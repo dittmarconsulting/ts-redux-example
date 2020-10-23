@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 
-import { containerProps, colors } from '../styles';
+import { ContainerProps, Colors } from '../styles';
 import { ProductDescription } from './ProductDescription';
 import { IProduct } from '../types/iProduct';
 
 const Container = styled.TouchableOpacity`
-  ${containerProps.row}
-  ${containerProps.jCenter}
-  background-color: ${colors.white};
+  ${ContainerProps.row}
+  ${ContainerProps.jCenter}
+  background-color: ${Colors.white};
   height: 150px;
   margin-top: 10px;
   padding-left: 20px;
