@@ -10,12 +10,12 @@ import {
   ISetQuantityDecrement,
 } from '../types/actions';
 
-export const fetchProducts = (): IFetchProducts => ({
-  type: C.FETCH_PRODUCTS,
+export const presetProducts = (): IFetchProducts => ({
+  type: C.PRESET_PRODUCTS,
 });
 
-export const storeProducts = (productList: IProduct[]): IStoreProducts => ({
-  type: C.STORE_PRODUCTS,
+export const setProducts = (productList: IProduct[]): IStoreProducts => ({
+  type: C.SET_PRODUCTS,
   payload: productList,
 });
 
