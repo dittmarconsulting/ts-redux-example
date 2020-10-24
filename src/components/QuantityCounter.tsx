@@ -2,7 +2,6 @@ import React, { FC, memo } from 'react';
 import styled from 'styled-components/native';
 
 import { ContainerProps, fontTypeProps, Colors } from '../styles';
-import { PressType } from '../types/componentTypes';
 
 const Container = styled.View`
   ${ContainerProps.row}
@@ -32,8 +31,8 @@ const QuantityText = styled.Text`
 `;
 
 interface IProps {
-  onIncrement: Function;
-  onDecrement: Function;
+  onIncrement: () => void;
+  onDecrement: () => void;
   quantity: number;
   maxQuantity: number;
 }
@@ -48,7 +47,7 @@ export const QuantityCounter: FC<IProps> = memo(
     <Container>
       <CounterContainer
         disabled={quantity >= maxQuantity}
-        onPress={onIncrement as PressType}>
+        onPress={onIncrement}>
         <StyledCounterIcon
           resizeMode="contain"
           source={
@@ -61,9 +60,7 @@ export const QuantityCounter: FC<IProps> = memo(
       <CounterTextContainer>
         <QuantityText>{`Qty ${quantity}`}</QuantityText>
       </CounterTextContainer>
-      <CounterContainer
-        disabled={quantity <= 0}
-        onPress={onDecrement as PressType}>
+      <CounterContainer disabled={quantity <= 0} onPress={onDecrement}>
         <StyledCounterIcon
           resizeMode="contain"
           source={
