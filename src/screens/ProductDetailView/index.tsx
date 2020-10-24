@@ -15,7 +15,7 @@ import {
 } from '../../redux/types/actions';
 import { ActionCreator } from '../../redux/actions';
 import { IProductState } from '../../redux/types/reducers';
-import { IProduct } from '../../types/iProduct';
+import { IProduct, IVariant } from '../../types/productTypes';
 import { ProductDescription } from '../../components/ProductDescription';
 import { QuantityCounter } from '../../components/QuantityCounter';
 import { Button } from '../../components/Button';
@@ -27,20 +27,28 @@ const Container = styled.ScrollView`
   padding: 30px;
 `;
 
+const StyledImage = styled.Image`
+  height: 400px;
+  width: 400px;
+`;
+
 interface IProps {
   componentId: string;
   selectedProduct: IProduct;
+  selectedVariant: IVariant;
 }
 
 const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, selectedProduct }) => {
+  ({ componentId, selectedProduct, selectedVariant }) => {
     const [counter, setCounter] = useState<number>(0);
     return (
-      <Container>
+      <Container
+        // eslint-disable-next-line react-native/no-inline-styles
+        contentContainerStyle={{ alignItems: 'center', paddingBottom: 50 }}>
         <ProductDescription
           isCentered
           product={selectedProduct}
-          variantPrice={100}
+          variantPrice={selectedVariant?.unitPrice}
         />
         {selectedProduct?.variantOptions
           .sort((a, b) => a.unitPrice - b.unitPrice)
@@ -48,9 +56,15 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
             <Button
               key={variant?.productId}
               onButtonPress={() => {}}
-              buttonText={'Hello'}
+              buttonText={variant?.model}
             />
           ))}
+        <StyledImage
+          resizeMode="contain"
+          source={{
+            uri: selectedVariant?.image?.url,
+          }}
+        />
         <QuantityCounter
           onIncrement={() => setCounter(counter + 1)}
           onDecrement={() => setCounter(counter - 1)}
@@ -64,6 +78,7 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
 
 const mapStateToProps = (state: { productState: IProductState }) => ({
   selectedProduct: state?.productState.selectedProduct,
+  selectedVariant: state?.productState.selectedVariant,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {

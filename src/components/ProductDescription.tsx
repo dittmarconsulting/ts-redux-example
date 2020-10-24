@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import { ContainerProps, fontTypeProps, Colors } from '../styles';
 import { getPrice } from '../utility/stringUtil';
-import { IProduct } from '../types/iProduct';
+import { IProduct } from '../types/productTypes';
 
 type StyledType = {
   isCentered: boolean;

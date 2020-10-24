@@ -10,11 +10,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 import {
   ActionTypes,
   IFetchProducts,
+  IPresetSelectedProduct,
   ISetSelectedProduct,
 } from '../../redux/types/actions';
 import { Colors } from '../../styles';
 import { ActionCreator } from '../../redux/actions';
-import { IProduct } from '../../types/iProduct';
+import { IProduct } from '../../types/productTypes';
 import { IProductState } from '../../redux/types/reducers';
 import { ProductCard } from '../../components/ProductCard';
 
@@ -26,17 +27,18 @@ interface IProps {
   componentId: string;
   products: IProduct[];
   presetProducts: () => IFetchProducts;
+  presetSelectedProduct: (product: IProduct) => IPresetSelectedProduct;
   setSelectedProduct: (product: IProduct) => ISetSelectedProduct;
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, products, presetProducts, setSelectedProduct }) => {
+  ({ componentId, products, presetProducts, presetSelectedProduct }) => {
     useEffect(() => {
       products.length === 0 && presetProducts();
     }, [products.length, presetProducts]);
 
     const handleOnProductPress = (product: IProduct) => {
-      setSelectedProduct(product);
+      presetSelectedProduct(product);
       Navigation.push(componentId, {
         component: {
           name: 'detail',
@@ -64,7 +66,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
     presetProducts: action.presetProducts,
-    setSelectedProduct: action.setSelectedProduct,
+    presetSelectedProduct: action.presetSelectedProduct,
   };
 };
 

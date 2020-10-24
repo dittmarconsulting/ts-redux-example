@@ -1,10 +1,10 @@
 import C from '../constants';
-import { IProduct } from '../../types/iProduct';
-import { IVariant } from '../../types/iVariant';
+import { IProduct, IVariant } from '../../types/productTypes';
 import {
   IFetchProducts,
   IStoreProducts,
   ISetSelectedProduct,
+  IPresetSelectedProduct,
   ISetProductVariant,
   ISetQuantityIncrement,
   ISetQuantityDecrement,
@@ -17,6 +17,13 @@ export const presetProducts = (): IFetchProducts => ({
 export const setProducts = (productList: IProduct[]): IStoreProducts => ({
   type: C.SET_PRODUCTS,
   payload: productList,
+});
+
+export const presetSelectedProduct = (
+  product: IProduct,
+): IPresetSelectedProduct => ({
+  type: C.PRESET_SELECTED_PRODUCT,
+  payload: product,
 });
 
 export const setSelectedProduct = (product: IProduct): ISetSelectedProduct => ({
