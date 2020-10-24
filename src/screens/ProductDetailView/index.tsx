@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import {
   NavigationFunctionComponent,
@@ -18,6 +18,7 @@ import { IProductState } from '../../redux/types/reducers';
 import { IProduct } from '../../types/iProduct';
 import { ProductDescription } from '../../components/ProductDescription';
 import { QuantityCounter } from '../../components/QuantityCounter';
+import { Button } from '../../components/Button';
 
 const Container = styled.ScrollView`
   ${ContainerProps.column}
@@ -33,6 +34,7 @@ interface IProps {
 
 const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
   ({ componentId, selectedProduct }) => {
+    const [counter, setCounter] = useState<number>(0);
     return (
       <Container>
         <ProductDescription
@@ -40,10 +42,19 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
           product={selectedProduct}
           variantPrice={100}
         />
+        {selectedProduct?.variantOptions
+          .sort((a, b) => a.unitPrice - b.unitPrice)
+          .map((variant) => (
+            <Button
+              key={variant?.productId}
+              onButtonPress={() => {}}
+              buttonText={'Hello'}
+            />
+          ))}
         <QuantityCounter
-          onIncrement={() => {}}
-          onDecrement={() => {}}
-          quantity={0}
+          onIncrement={() => setCounter(counter + 1)}
+          onDecrement={() => setCounter(counter - 1)}
+          quantity={counter}
           maxQuantity={10}
         />
       </Container>
@@ -58,7 +69,7 @@ const mapStateToProps = (state: { productState: IProductState }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
-    fetchProducts: action.fetchProducts,
+    presetProducts: action.presetProducts,
   };
 };
 

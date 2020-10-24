@@ -41,7 +41,7 @@ const load = storage.createLoader(engine);
 load(store)
   .then(() => {
     store.dispatch({
-      type: C.STORE_SYNCED,
+      type: C.PRESET_STORE_SYNCED,
       payload: true,
     });
     return this;

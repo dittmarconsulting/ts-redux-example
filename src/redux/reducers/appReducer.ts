@@ -8,7 +8,7 @@ const initState: ReducerTypes = {
 
 export const appState = (state = initState, action: ActionTypes) => {
   switch (action.type) {
-    case C.STORE_SYNCED:
+    case C.PRESET_STORE_SYNCED:
       return {
         ...state,
         storeSynced: action.type,

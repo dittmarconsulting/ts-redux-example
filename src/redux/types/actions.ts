@@ -3,11 +3,11 @@ import { IProduct } from '../../types/iProduct';
 import { IVariant } from '../../types/iVariant';
 
 export interface IFetchProducts {
-  type: typeof C.FETCH_PRODUCTS;
+  type: typeof C.PRESET_PRODUCTS;
 }
 
 export interface IStoreProducts {
-  type: typeof C.STORE_PRODUCTS;
+  type: typeof C.SET_PRODUCTS;
   payload: IProduct[];
 }
 
@@ -29,7 +29,10 @@ export interface ISetQuantityDecrement {
   type: typeof C.SET_QUANTITY_INCREMENT;
 }
 
-export type ActionTypes = IFetchProducts | IStoreProducts | ISetSelectedProduct
+export type ActionTypes =
+  | IFetchProducts
+  | IStoreProducts
+  | ISetSelectedProduct
   | ISetProductVariant
   | ISetQuantityIncrement
   | ISetQuantityDecrement;

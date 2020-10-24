@@ -25,15 +25,15 @@ const StyledFlatList = styled.FlatList`
 interface IProps {
   componentId: string;
   products: IProduct[];
-  fetchProducts: () => IFetchProducts;
+  presetProducts: () => IFetchProducts;
   setSelectedProduct: (product: IProduct) => ISetSelectedProduct;
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, products, fetchProducts, setSelectedProduct }) => {
+  ({ componentId, products, presetProducts, setSelectedProduct }) => {
     useEffect(() => {
-      products.length === 0 && fetchProducts();
-    }, [products.length, fetchProducts]);
+      products.length === 0 && presetProducts();
+    }, [products.length, presetProducts]);
 
     const handleOnProductPress = (product: IProduct) => {
       setSelectedProduct(product);
@@ -63,7 +63,7 @@ const mapStateToProps = (state: { productState: IProductState }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
-    fetchProducts: action.fetchProducts,
+    presetProducts: action.presetProducts,
     setSelectedProduct: action.setSelectedProduct,
   };
 };
