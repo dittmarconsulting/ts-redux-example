@@ -38,14 +38,14 @@ const store = createStore(reducer, {}, enhancer);
 sagaMiddleware.run(rootSaga);
 
 const load = storage.createLoader(engine);
-load(store)
-  .then(() => {
-    store.dispatch({
-      type: C.STORE_SYNCED,
-      payload: true,
-    });
-    return this;
-  })
-  .then(null, (err) => console.log('err: ', err));
+// load(store)
+//   .then(() => {
+//     store.dispatch({
+//       type: C.PRESET_STORE_SYNCED,
+//       payload: true,
+//     });
+//     return this;
+//   })
+//   .then(null, (err) => console.log('err: ', err));
 
 export default store;

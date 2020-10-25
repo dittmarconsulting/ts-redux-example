@@ -2,13 +2,22 @@ import C from '../constants';
 import { IProduct } from '../../types/iProduct';
 import { IVariant } from '../../types/iVariant';
 
+export interface ISyncStore {
+  type: typeof C.PRESET_STORE_SYNCED;
+}
+
 export interface IFetchProducts {
-  type: typeof C.FETCH_PRODUCTS;
+  type: typeof C.PRESET_PRODUCTS;
 }
 
 export interface IStoreProducts {
-  type: typeof C.STORE_PRODUCTS;
+  type: typeof C.SET_PRODUCTS;
   payload: IProduct[];
+}
+
+export interface IPresetSelectedProduct {
+  type: typeof C.PRESET_SELECTED_PRODUCT;
+  payload: IProduct;
 }
 
 export interface ISetSelectedProduct {
@@ -26,10 +35,15 @@ export interface ISetQuantityIncrement {
 }
 
 export interface ISetQuantityDecrement {
-  type: typeof C.SET_QUANTITY_INCREMENT;
+  type: typeof C.SET_QUANTITY_DECREMENT;
 }
 
-export type ActionTypes = IFetchProducts | IStoreProducts | ISetSelectedProduct
+export type ActionTypes =
+  | ISyncStore
+  | IFetchProducts
+  | IStoreProducts
+  | IPresetSelectedProduct
+  | ISetSelectedProduct
   | ISetProductVariant
   | ISetQuantityIncrement
   | ISetQuantityDecrement;
