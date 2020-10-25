@@ -19,7 +19,7 @@ export const productState = (
   action: ActionTypes,
 ): IProductState => {
   switch (action.type) {
-    case C.SET_PRODUCTS:
+    case C.STORE_PRODUCTS:
       return {
         ...state,
         products: (action as IStoreProducts).payload,
