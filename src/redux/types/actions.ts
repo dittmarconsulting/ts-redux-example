@@ -1,6 +1,10 @@
 import C from '../constants';
 import { IProduct, IVariant } from '../../types/productTypes';
 
+export interface ISyncStore {
+  type: typeof C.PRESET_STORE_SYNCED;
+}
+
 export interface IFetchProducts {
   type: typeof C.FETCH_PRODUCTS;
 }
@@ -28,7 +32,10 @@ export interface ISetQuantityDecrement {
   type: typeof C.SET_QUANTITY_INCREMENT;
 }
 
-export type ActionTypes = IFetchProducts | IStoreProducts | ISetSelectedProduct
+export type ActionTypes =
+  | IFetchProducts
+  | IStoreProducts
+  | ISetSelectedProduct
   | ISetProductVariant
   | ISetQuantityIncrement
   | ISetQuantityDecrement;
