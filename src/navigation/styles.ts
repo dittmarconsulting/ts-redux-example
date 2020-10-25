@@ -1,19 +1,19 @@
 import { OptionsModalPresentationStyle } from 'react-native-navigation';
 
-import { INavStyles } from '../types/iNavStyles';
-import { colors } from '../styles';
+import { INavStyles } from '../types/navTypes';
+import { Colors } from '../styles';
 
 export const navStyles: INavStyles = Object.freeze({
   modalPresentationStyle: OptionsModalPresentationStyle.fullScreen,
   topBar: {
     title: {
-      color: colors.white,
+      color: Colors.white,
     },
     background: {
-      color: colors.toryBlue,
+      color: Colors.toryBlue,
     },
     backButton: {
-      color: colors.white,
+      color: Colors.white,
       showTitle: false,
     },
   },

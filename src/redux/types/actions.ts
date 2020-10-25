@@ -1,6 +1,5 @@
 import C from '../constants';
-import { IProduct } from '../../types/iProduct';
-import { IVariant } from '../../types/iVariant';
+import { IProduct, IVariant } from '../../types/productTypes';
 
 export interface IFetchProducts {
   type: typeof C.FETCH_PRODUCTS;
