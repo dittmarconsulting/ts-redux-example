@@ -1,5 +1,4 @@
-import { IProduct } from '../../types/iProduct';
-import { IVariant } from '../../types/iVariant';
+import { IVariant, IProduct } from '../../types/productTypes';
 
 export interface IAppState {
   readonly storeSynced: boolean;

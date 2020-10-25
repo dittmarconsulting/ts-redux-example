@@ -1,5 +1,3 @@
-import { IVariant } from './iVariant';
-
 export interface IProduct {
   id: string;
   name: string;
@@ -17,4 +15,17 @@ export interface IProduct {
   currencyCode: string;
   currencySymbol: string;
   variantOptions: IVariant[];
+}
+
+export interface IVariant {
+  productId: string;
+  model: string;
+  image: {
+    url: string;
+    alt: string;
+    title: string;
+  };
+  unitPrice: number;
+  maxOrderQuantity: number;
+  inStock: boolean;
 }
