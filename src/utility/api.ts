@@ -1,5 +1,5 @@
 import { mockData } from '../mockData';
-import { IProduct } from '../types/iProduct';
+import { IProduct } from '../types/productTypes';
 
 // mocking an API call to get the data
 export const getProducts = () =>

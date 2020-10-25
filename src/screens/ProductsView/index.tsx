@@ -1,60 +1,62 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, ElementType } from 'react';
 import {
   NavigationFunctionComponent,
   Navigation,
 } from 'react-native-navigation';
-import styled from 'styled-components/native';
-import { FlatList, View, ListRenderItem } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch, ActionCreatorsMapObject } from 'redux';
+import styled from 'styled-components/native';
+import { bindActionCreators, Dispatch } from 'redux';
 
 import {
   ActionTypes,
   IFetchProducts,
+  IPresetSelectedProduct,
   ISetSelectedProduct,
 } from '../../redux/types/actions';
-import { colors } from '../../styles';
+import { Colors } from '../../styles';
 import { ActionCreator } from '../../redux/actions';
-import { IProduct } from '../../types/iProduct';
+import { IProduct } from '../../types/productTypes';
 import { IProductState } from '../../redux/types/reducers';
 import { ProductCard } from '../../components/ProductCard';
 
-const StyledFlatList = styled(FlatList)`
-  background-color: ${colors.silver};
+const StyledFlatList = styled.FlatList`
+  background-color: ${Colors.silver};
 `;
 
 interface IProps {
   componentId: string;
   products: IProduct[];
-  fetchProducts: () => IFetchProducts;
+  presetProducts: () => IFetchProducts;
+  presetSelectedProduct: (product: IProduct) => IPresetSelectedProduct;
+  setSelectedProduct: (product: IProduct) => ISetSelectedProduct;
 }
 
 export const ProductsView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, products, fetchProducts }) => {
+  ({ componentId, products, presetProducts, presetSelectedProduct }) => {
     useEffect(() => {
-      products.length === 0 && fetchProducts();
-    }, [products.length, fetchProducts]);
+      products.length === 0 && presetProducts();
+    }, [products.length, presetProducts]);
 
-    const handleOnProductPress = (product) => {
-      // setSelectedProduct(product);
-      // setup navigation
+    const handleOnProductPress = (product: IProduct) => {
+      presetSelectedProduct(product);
+      Navigation.push(componentId, {
+        component: {
+          name: 'detail',
+        },
+      });
     };
 
     return (
-      <StyledFlatList
+      <StyledFlatList<ElementType>
         data={products}
-        renderItem={({ item }) => (
+        renderItem={({ item }: { item: IProduct }) => (
           <ProductCard product={item} onProductPress={handleOnProductPress} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: IProduct) => item.id}
       />
     );
   },
 );
-
-/*
-
-*/
 
 const mapStateToProps = (state: { productState: IProductState }) => ({
   products: state.productState.products,
@@ -63,7 +65,8 @@ const mapStateToProps = (state: { productState: IProductState }) => ({
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
-    fetchProducts: action.fetchProducts,
+    presetProducts: action.presetProducts,
+    presetSelectedProduct: action.presetSelectedProduct,
   };
 };
 

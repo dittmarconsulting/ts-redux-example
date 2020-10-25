@@ -1,12 +1,12 @@
 import React, { FC, ReactNode } from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
 
-import { colors, statusBarStyle } from '../styles';
+import { Colors, StatusBarStyle } from '../styles';
 
-const StyledSafeAreaView = styled(SafeAreaView)`
+const StyledSafeAreaView = styled.SafeAreaView`
   flex-grow: 1;
-  background-color: ${colors.toryBlue};
+  background-color: ${Colors.toryBlue};
 `;
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
 
 export const ScreenWrapper: FC<IProps> = (props) => (
   <>
-    <StatusBar barStyle={statusBarStyle.light} />
+    <StatusBar barStyle={StatusBarStyle.light} />
     <StyledSafeAreaView {...props} />
   </>
 );
