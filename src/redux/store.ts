@@ -4,8 +4,8 @@ import createSagaMiddleware from 'redux-saga';
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 
-import rootReducer from './reducers/index';
-import { ActionCreator } from './actions/index';
+import rootReducer from './reducers';
+import { ActionCreator } from './actions';
 import { storageKey } from './config.json';
 import rootSaga from './rootSaga';
 import C from './constants';
@@ -17,6 +17,7 @@ const engineMiddleware = storage.createMiddleware(engine);
 
 declare global {
   interface Window {
+    // eslint-disable-next-line no-empty-pattern
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}): typeof compose;
   }
 }
@@ -33,19 +34,21 @@ const enhancer = composeEnhancers(
   applyMiddleware(engineMiddleware, sagaMiddleware),
 );
 
-const store = createStore(reducer, {}, enhancer);
+const initialState: any = {};
+
+const store = createStore(reducer, initialState, enhancer);
 
 sagaMiddleware.run(rootSaga);
 
 const load = storage.createLoader(engine);
-// load(store)
-//   .then(() => {
-//     store.dispatch({
-//       type: C.PRESET_STORE_SYNCED,
-//       payload: true,
-//     });
-//     return this;
-//   })
-//   .then(null, (err) => console.log('err: ', err));
+load(store)
+  .then(() => {
+    store.dispatch({
+      type: C.PRESET_STORE_SYNCED,
+      payload: true,
+    });
+    return this;
+  })
+  .then(null, (err) => console.log('err: ', err));
 
 export default store;

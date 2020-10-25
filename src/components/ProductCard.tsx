@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import { ContainerProps, Colors } from '../styles';
 import { ProductDescription } from './ProductDescription';
-import { IProduct } from '../types/iProduct';
+import { IProduct } from '../types/productTypes';
 
 const Container = styled.TouchableOpacity`
   ${ContainerProps.row}

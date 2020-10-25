@@ -1,6 +1,6 @@
 import { OptionsModalPresentationStyle } from 'react-native-navigation';
 
-import { INavStyles } from '../types/iNavStyles';
+import { INavStyles } from '../types/navTypes';
 import { Colors } from '../styles';
 
 export const navStyles: INavStyles = Object.freeze({
