@@ -8,6 +8,7 @@ import {
   setVariant,
 } from '../actions/productActions';
 import { IPresetSelectedProduct } from '../types/actions';
+import { IVariant } from '../../types/productTypes';
 
 export function* watchPresetProducts() {
   yield takeEvery(C.PRESET_PRODUCTS, workerPresetProducts);
@@ -31,7 +32,7 @@ export function* workerPresetSelectedProduct(action: IPresetSelectedProduct) {
     const selectedProduct = action.payload;
     yield put(setSelectedProduct(selectedProduct));
     const highestPriceVariant = selectedProduct?.variantOptions?.sort(
-      (a, b) => b.unitPrice - a.unitPrice,
+      (a: IVariant, b: IVariant) => b.unitPrice - a.unitPrice,
     )[0];
     yield put(setVariant(highestPriceVariant));
   } catch (error) {
