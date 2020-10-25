@@ -5,7 +5,7 @@ import * as Api from '../../utility/api';
 import {
   setProducts,
   setSelectedProduct,
-  setProductVariant,
+  setVariant,
 } from '../actions/productActions';
 import { IPresetSelectedProduct } from '../types/actions';
 
@@ -33,7 +33,7 @@ export function* workerPresetSelectedProduct(action: IPresetSelectedProduct) {
     const highestPriceVariant = selectedProduct?.variantOptions?.sort(
       (a, b) => b.unitPrice - a.unitPrice,
     )[0];
-    yield put(setProductVariant(highestPriceVariant));
+    yield put(setVariant(highestPriceVariant));
   } catch (error) {
     console.log('Error: workerSearchFAQs(): ', error);
   }

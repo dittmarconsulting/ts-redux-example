@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import styled from 'styled-components/native';
 import {
   NavigationFunctionComponent,
@@ -7,12 +7,8 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-import { ContainerProps, Colors } from '../../styles';
-import {
-  ActionTypes,
-  IFetchProducts,
-  ISetSelectedProduct,
-} from '../../redux/types/actions';
+import { ContainerProps, fontTypeProps, Colors } from '../../styles';
+import { ActionTypes } from '../../redux/types/actions';
 import { ActionCreator } from '../../redux/actions';
 import { IProductState } from '../../redux/types/reducers';
 import { IProduct, IVariant } from '../../types/productTypes';
@@ -27,8 +23,13 @@ const Container = styled.ScrollView`
   padding: 30px;
 `;
 
+const ProductText = styled.Text`
+  ${fontTypeProps.detail}
+  color: ${Colors.charcoal};
+`;
+
 const StyledImage = styled.Image`
-  height: 400px;
+  height: 300px;
   width: 400px;
 `;
 
@@ -36,11 +37,25 @@ interface IProps {
   componentId: string;
   selectedProduct: IProduct;
   selectedVariant: IVariant;
+  setVariant: (variant: IVariant) => void;
 }
 
 const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
-  ({ componentId, selectedProduct, selectedVariant }) => {
+  ({ componentId, selectedProduct, selectedVariant, setVariant }) => {
     const [counter, setCounter] = useState<number>(0);
+
+    const handleVariantButtonPress = (variant: IVariant) => {
+      setVariant(variant);
+    };
+
+    const handleCheckoutButtonPress = () => {
+      Navigation.push(componentId, {
+        component: {
+          name: 'products', // got to checkout
+        },
+      });
+    };
+
     return (
       <Container
         // eslint-disable-next-line react-native/no-inline-styles
@@ -50,15 +65,20 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
           product={selectedProduct}
           variantPrice={selectedVariant?.unitPrice}
         />
+        <ProductText>{selectedProduct?.shortDescription}</ProductText>
         {selectedProduct?.variantOptions
           .sort((a, b) => a.unitPrice - b.unitPrice)
           .map((variant) => (
             <Button
               key={variant?.productId}
-              onButtonPress={() => {}}
+              onButtonPress={() => handleVariantButtonPress(variant)}
               buttonText={variant?.model}
+              buttonActiveColor={Colors.skyBlue}
+              buttonActiveTextColor={Colors.white}
+              isActive={variant?.productId === selectedVariant?.productId}
             />
           ))}
+
         <StyledImage
           resizeMode="contain"
           source={{
@@ -70,6 +90,14 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
           onDecrement={() => setCounter(counter - 1)}
           quantity={counter}
           maxQuantity={10}
+        />
+        <Button
+          onButtonPress={handleCheckoutButtonPress}
+          buttonText={'Checkout'}
+          isDisabled={counter <= 0}
+          textColor={Colors.white}
+          buttonColor={Colors.rose}
+          buttonDisabledColor={Colors.rose50}
         />
       </Container>
     );
@@ -85,6 +113,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   const action = bindActionCreators(ActionCreator, dispatch);
   return {
     presetProducts: action.presetProducts,
+    setVariant: action.setVariant,
   };
 };
 

@@ -31,7 +31,7 @@ export const setSelectedProduct = (product: IProduct): ISetSelectedProduct => ({
   payload: product,
 });
 
-export const setProductVariant = (variant: IVariant): ISetProductVariant => ({
+export const setVariant = (variant: IVariant): ISetProductVariant => ({
   type: C.SET_PRODUCT_VARIANT,
   payload: variant,
 });

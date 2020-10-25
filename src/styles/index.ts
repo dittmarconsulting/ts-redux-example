@@ -3,14 +3,19 @@ export enum StatusBarStyle {
   dark = 'dark-content',
 }
 
+// https://htmlcolorcodes.com/color-names/
 export enum Colors {
   transparent = 'rgba(0, 0, 0, 0.0)',
   white = 'rgba(255, 255, 255, 1.0)',
   toryBlue = 'rgba(16, 88, 161, 1.0)',
   silver = 'rgba(242, 243, 248, 1.0)',
+  silver50 = 'rgba(253, 141, 131, 0.5)',
   charcoal = 'rgba(24, 24, 24, 1.0)',
   cursedGrey = 'rgba(102, 102, 102, 1.0)',
-  orange = 'rgba(253, 141, 131, 1.0)',
+  rose = 'rgba(253, 141, 131, 1.0)',
+  rose50 = 'rgba(253, 141, 131, 0.5)',
+  skyBlue = 'rgba(135, 206, 235, 1)',
+  skyBlue50 = 'rgba(70, 130, 180, 0.5)',
 }
 
 export enum ContainerProps {
