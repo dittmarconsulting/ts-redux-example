@@ -51,7 +51,7 @@ export const mockData = {
       id: 'A-024023',
       name: 'iPad Air',
       shortDescription:
-        'The new iPad combines tremendous capability with unmatched ease of use and versatility. With the powerful A12 Bionic chip, support for Apple Pencil and the Smart Keyboard, and the amazing new things you can do with iPadOS 14, now there’s even more to love about iPad.',
+        '5G goes Pro.1 A14 Bionic rockets past every other smartphone chip. The Pro camera system takes low-light photography to the next level — with an even bigger jump on iPhone 12 Pro Max. And Ceramic Shield delivers four times better drop performance.2 Let’s see what this thing can do.',
       brand: 'Apple',
       image: {
         url:

@@ -1,20 +1,10 @@
-import { Reducer, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
+import { ReducerTypes } from '../types/reducers';
 import { appState } from './appReducer';
 import { productState } from './productReducer';
 
-import { IProductState } from '../types/reducers';
-import { ActionTypes } from '../types/actions';
-
-const combinedReducer: Reducer<
-  {
-    appState: never;
-    productState: IProductState;
-  },
-  ActionTypes
-> = combineReducers({
+export default combineReducers<ReducerTypes>({
   appState,
   productState,
 });
-
-export default combinedReducer;

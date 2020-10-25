@@ -1,29 +1,22 @@
 import C from '../constants';
-import { IProduct, IVariant } from '../../types/productTypes';
+import { IProduct } from '../../types/iProduct';
+import { IVariant } from '../../types/iVariant';
 import {
   IFetchProducts,
   IStoreProducts,
   ISetSelectedProduct,
-  IPresetSelectedProduct,
   ISetProductVariant,
   ISetQuantityIncrement,
   ISetQuantityDecrement,
 } from '../types/actions';
 
-export const presetProducts = (): IFetchProducts => ({
-  type: C.PRESET_PRODUCTS,
+export const fetchProducts = (): IFetchProducts => ({
+  type: C.FETCH_PRODUCTS,
 });
 
-export const setProducts = (productList: IProduct[]): IStoreProducts => ({
-  type: C.SET_PRODUCTS,
+export const storeProducts = (productList: IProduct[]): IStoreProducts => ({
+  type: C.STORE_PRODUCTS,
   payload: productList,
-});
-
-export const presetSelectedProduct = (
-  product: IProduct,
-): IPresetSelectedProduct => ({
-  type: C.PRESET_SELECTED_PRODUCT,
-  payload: product,
 });
 
 export const setSelectedProduct = (product: IProduct): ISetSelectedProduct => ({
@@ -31,7 +24,7 @@ export const setSelectedProduct = (product: IProduct): ISetSelectedProduct => ({
   payload: product,
 });
 
-export const setVariant = (variant: IVariant): ISetProductVariant => ({
+export const setProductVariant = (variant: IVariant): ISetProductVariant => ({
   type: C.SET_PRODUCT_VARIANT,
   payload: variant,
 });

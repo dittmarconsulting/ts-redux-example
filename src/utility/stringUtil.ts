@@ -25,7 +25,7 @@ export const getPrice = (
     : '$';
   return priceRange && !variantPrice
     ? `${getPriceString(slicedCurrencySymbol, minPrice)} - ${getPriceString(
-        slicedCurrencySymbol,
+        currencySymbol,
         maxPrice,
       )}`
     : `${getPriceString(
