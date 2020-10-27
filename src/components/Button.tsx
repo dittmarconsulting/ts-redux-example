@@ -13,8 +13,8 @@ interface IStyledButtonProp {
 
 const StyledButton = styled.TouchableOpacity<IStyledButtonProp>`
   ${ContainerProps.center}
+  ${ContainerProps.grow}
   height: 60px;
-  width: 100%;
   background-color: ${(props) =>
     props.disabled
       ? props.buttonDisabledColor

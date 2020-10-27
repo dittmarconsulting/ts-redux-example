@@ -22,6 +22,7 @@ export enum ContainerProps {
   absolute = 'position: absolute; top: 0; left: 0; right: 0;',
   flex = 'flex-grow: 1',
   flexShrink = 'flex-shrink: 1',
+  grow = 'width: 100%;',
   row = 'flex-direction: row;',
   column = 'flex-direction: column;',
   center = 'justify-content: center; align-items: center;',

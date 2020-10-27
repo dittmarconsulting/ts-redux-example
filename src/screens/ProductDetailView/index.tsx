@@ -29,6 +29,11 @@ const ProductText = styled.Text`
   color: ${Colors.charcoal};
 `;
 
+const ButtonContainer = styled.View`
+  ${ContainerProps.grow}
+  margin-top: 10px;
+`;
+
 interface IProps {
   componentId: string;
   selectedProduct: IProduct | null;
@@ -85,14 +90,16 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
           quantity={counter}
           maxQuantity={10}
         />
-        <Button
-          onButtonPress={handleCheckoutButtonPress}
-          buttonText={'Checkout'}
-          isDisabled={counter <= 0}
-          textColor={Colors.white}
-          buttonColor={Colors.rose}
-          buttonDisabledColor={Colors.rose50}
-        />
+        <ButtonContainer>
+          <Button
+            onButtonPress={handleCheckoutButtonPress}
+            buttonText={'Checkout'}
+            isDisabled={counter <= 0}
+            textColor={Colors.white}
+            buttonColor={Colors.rose}
+            buttonDisabledColor={Colors.rose50}
+          />
+        </ButtonContainer>
       </Container>
     );
   },
