@@ -30,7 +30,7 @@ const DetailText = styled.Text`
 
 interface IProps {
   isCentered?: boolean;
-  product: IProduct;
+  product: IProduct | null;
   variantPrice?: number;
 }
 
