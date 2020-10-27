@@ -5,7 +5,11 @@ import { ContainerProps, fontTypeProps, Colors } from '../styles';
 import { getPrice } from '../utility/stringUtil';
 import { IProduct } from '../types/productTypes';
 
-const TextContainer = styled.View`
+type ViewType = {
+  isCentered: boolean;
+};
+
+const TextContainer = styled.View<ViewType>`
   ${ContainerProps.flexShrink}
   ${ContainerProps.column}
   ${ContainerProps.jCenter}
@@ -26,7 +30,7 @@ const DetailText = styled.Text`
 
 interface IProps {
   isCentered?: boolean;
-  product: IProduct;
+  product: IProduct | null;
   variantPrice?: number;
 }
 

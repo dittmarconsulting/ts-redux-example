@@ -15,6 +15,7 @@ import { IProduct, IVariant } from '../../types/productTypes';
 import { ProductDescription } from '../../components/ProductDescription';
 import { QuantityCounter } from '../../components/QuantityCounter';
 import { Button } from '../../components/Button';
+import { ImageLoader } from '../../components/ImageLoader';
 
 const Container = styled.ScrollView`
   ${ContainerProps.column}
@@ -28,15 +29,10 @@ const ProductText = styled.Text`
   color: ${Colors.charcoal};
 `;
 
-const StyledImage = styled.Image`
-  height: 300px;
-  width: 400px;
-`;
-
 interface IProps {
   componentId: string;
-  selectedProduct: IProduct;
-  selectedVariant: IVariant;
+  selectedProduct: IProduct | null;
+  selectedVariant: IVariant | null;
   setVariant: (variant: IVariant) => void;
 }
 
@@ -78,12 +74,10 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
               isActive={variant?.productId === selectedVariant?.productId}
             />
           ))}
-
-        <StyledImage
-          resizeMode="contain"
-          source={{
-            uri: selectedVariant?.image?.url,
-          }}
+        <ImageLoader
+          height={300}
+          width={400}
+          source={{ uri: selectedVariant?.image?.url }}
         />
         <QuantityCounter
           onIncrement={() => setCounter(counter + 1)}
