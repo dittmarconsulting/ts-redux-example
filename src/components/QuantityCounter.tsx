@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components/native';
 
 import { ContainerProps, fontTypeProps, Colors } from '../styles';
@@ -33,7 +33,7 @@ const QuantityText = styled.Text`
 interface IProps {
   onIncrement: () => void;
   onDecrement: () => void;
-  quantity: number;
+  quantity: number | Dispatch<SetStateAction<number>>;
   maxQuantity: number;
 }
 

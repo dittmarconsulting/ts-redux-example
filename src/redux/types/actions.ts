@@ -1,3 +1,5 @@
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+
 import C from '../constants';
 import { IProduct, IVariant } from '../../types/productTypes';
 
@@ -29,12 +31,9 @@ export interface ISetProductVariant {
   payload: IVariant;
 }
 
-export interface ISetQuantityIncrement {
-  type: typeof C.SET_QUANTITY_INCREMENT;
-}
-
-export interface ISetQuantityDecrement {
-  type: typeof C.SET_QUANTITY_DECREMENT;
+export interface ISetQuantity {
+  type: typeof C.SET_QUANTITY;
+  payload: number | Dispatch<SetStateAction<number>>;
 }
 
 export type ActionTypes =
@@ -44,5 +43,4 @@ export type ActionTypes =
   | IPresetSelectedProduct
   | ISetSelectedProduct
   | ISetProductVariant
-  | ISetQuantityIncrement
-  | ISetQuantityDecrement;
+  | ISetQuantity;

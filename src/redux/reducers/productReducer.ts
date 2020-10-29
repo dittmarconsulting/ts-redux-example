@@ -4,6 +4,7 @@ import {
   IStoreProducts,
   ISetSelectedProduct,
   ISetProductVariant,
+  ISetQuantity,
   ActionTypes,
 } from '../types/actions';
 
@@ -11,7 +12,7 @@ const initState: IProductState = {
   products: [],
   selectedProduct: null,
   selectedVariant: null,
-  quantity: 0,
+  quantity: 2,
 };
 
 export const productState = (
@@ -34,19 +35,10 @@ export const productState = (
         ...state,
         selectedVariant: (action as ISetProductVariant).payload,
       };
-    case C.SET_QUANTITY_INCREMENT:
+    case C.SET_QUANTITY:
       return {
         ...state,
-        quantity:
-          state.quantity <
-          (!!state.selectedVariant && state.selectedVariant.maxOrderQuantity)
-            ? state.quantity + 1
-            : state.quantity,
-      };
-    case C.SET_QUANTITY_DECREMENT:
-      return {
-        ...state,
-        quantity: state.quantity > 0 ? state.quantity - 1 : state.quantity,
+        quantity: (action as ISetQuantity).payload,
       };
     default:
       return state;

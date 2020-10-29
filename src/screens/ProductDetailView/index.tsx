@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/native';
 import {
   NavigationFunctionComponent,
@@ -16,6 +16,7 @@ import { ProductDescription } from '../../components/ProductDescription';
 import { QuantityCounter } from '../../components/QuantityCounter';
 import { Button } from '../../components/Button';
 import { ImageLoader } from '../../components/ImageLoader';
+import { useCounter } from '../../hooks/useCounter';
 
 const Container = styled.ScrollView`
   ${ContainerProps.column}
@@ -43,7 +44,7 @@ interface IProps {
 
 const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
   ({ componentId, selectedProduct, selectedVariant, setVariant }) => {
-    const [counter, setCounter] = useState<number>(0);
+    const [quantity, setQuantity] = useCounter(0);
 
     const handleVariantButtonPress = (variant: IVariant) => {
       setVariant(variant);
@@ -85,16 +86,16 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
           source={{ uri: selectedVariant?.image?.url }}
         />
         <QuantityCounter
-          onIncrement={() => setCounter(counter + 1)}
-          onDecrement={() => setCounter(counter - 1)}
-          quantity={counter}
-          maxQuantity={10}
+          onIncrement={() => setQuantity(quantity + 1)}
+          onDecrement={() => setQuantity(quantity - 1)}
+          quantity={quantity}
+          maxQuantity={selectedVariant?.maxOrderQuantity || 1}
         />
         <ButtonContainer>
           <Button
             onButtonPress={handleCheckoutButtonPress}
             buttonText={'Checkout'}
-            isDisabled={counter <= 0}
+            isDisabled={quantity <= 0}
             textColor={Colors.white}
             buttonColor={Colors.rose}
             buttonDisabledColor={Colors.rose50}
