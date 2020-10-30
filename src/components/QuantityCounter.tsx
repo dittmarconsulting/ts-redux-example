@@ -33,7 +33,7 @@ const QuantityText = styled.Text`
 interface IProps {
   onIncrement: () => void;
   onDecrement: () => void;
-  quantity: number | Dispatch<SetStateAction<number>>;
+  quantity: number;
   maxQuantity: number;
 }
 

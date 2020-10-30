@@ -53,7 +53,7 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
     const handleCheckoutButtonPress = () => {
       Navigation.push(componentId, {
         component: {
-          name: 'products', // got to checkout
+          name: 'products', // go-to checkout
         },
       });
     };
@@ -88,7 +88,7 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
         <QuantityCounter
           onIncrement={() => setQuantity(quantity + 1)}
           onDecrement={() => setQuantity(quantity - 1)}
-          quantity={quantity}
+          quantity={+quantity}
           maxQuantity={selectedVariant?.maxOrderQuantity || 1}
         />
         <ButtonContainer>

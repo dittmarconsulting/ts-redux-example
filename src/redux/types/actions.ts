@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 import C from '../constants';
 import { IProduct, IVariant } from '../../types/productTypes';
@@ -33,7 +33,7 @@ export interface ISetProductVariant {
 
 export interface ISetQuantity {
   type: typeof C.SET_QUANTITY;
-  payload: number | Dispatch<SetStateAction<number>>;
+  payload: number;
 }
 
 export type ActionTypes =
