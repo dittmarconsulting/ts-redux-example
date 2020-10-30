@@ -6,8 +6,7 @@ import {
   ISetSelectedProduct,
   IPresetSelectedProduct,
   ISetProductVariant,
-  ISetQuantityIncrement,
-  ISetQuantityDecrement,
+  ISetQuantity,
 } from '../types/actions';
 
 export const presetProducts = (): IFetchProducts => ({
@@ -36,10 +35,7 @@ export const setVariant = (variant: IVariant): ISetProductVariant => ({
   payload: variant,
 });
 
-export const setQuantityIncrement = (): ISetQuantityIncrement => ({
-  type: C.SET_QUANTITY_INCREMENT,
-});
-
-export const setQuantityDecrement = (): ISetQuantityDecrement => ({
-  type: C.SET_QUANTITY_DECREMENT,
+export const setQuantity = (quantity: number): ISetQuantity => ({
+  type: C.SET_QUANTITY,
+  payload: quantity,
 });
