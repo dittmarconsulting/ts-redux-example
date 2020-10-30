@@ -1,4 +1,4 @@
-import React, { FC, memo, Dispatch, SetStateAction } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components/native';
 
 import { ContainerProps, fontTypeProps, Colors } from '../styles';
