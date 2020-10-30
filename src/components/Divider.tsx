@@ -13,7 +13,7 @@ const Container = styled.View<ContainerType>`
   ${ContainerProps.column}
   ${ContainerProps.grow}
 	background-color: ${Colors.transparent};
-  height: 2px;
+  height: 1px;
   border-top-width: 1px;
   border-color: ${(props) => props.color};
   margin-top: ${(props) => `${props.mTop}px`};
