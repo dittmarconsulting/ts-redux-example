@@ -1,56 +1,12 @@
-import React from 'react';
 import { Navigation } from 'react-native-navigation';
-import { Provider } from 'react-redux';
 
 import { navStyles } from './navigation/styles';
-import store from './redux/store';
-import { ScreenWrapper } from './components/ScreenWrapper';
-import ProductsView from './screens/ProductsView';
-import ProductDetailView from './screens/ProductDetailView';
-
-// @ts-ignore
-ProductsView.options = {
-  topBar: {
-    title: {
-      text: 'Products',
-    },
-  },
-};
-
-// @ts-ignore
-ProductDetailView.options = {
-  topBar: {
-    title: {
-      text: 'Product Details',
-    },
-  },
-};
-
-Navigation.registerComponent(
-  'products',
-  () => (props) => (
-    <Provider store={store}>
-      <ScreenWrapper>
-        <ProductsView {...props} />
-      </ScreenWrapper>
-    </Provider>
-  ),
-  () => ProductsView,
-);
-
-Navigation.registerComponent(
-  'detail',
-  () => (props) => (
-    <Provider store={store}>
-      <ScreenWrapper>
-        <ProductDetailView {...props} />
-      </ScreenWrapper>
-    </Provider>
-  ),
-  () => ProductsView,
-);
+import { Products } from './screens/Products';
+import { registerScreens } from './navigation';
 
 Navigation.setDefaultOptions(navStyles);
+
+registerScreens();
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
@@ -59,7 +15,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'products',
+              name: Products.NavigationName,
             },
           },
         ],

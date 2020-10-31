@@ -16,6 +16,7 @@ import { ProductDescription } from '../../components/ProductDescription';
 import { QuantityCounter } from '../../components/QuantityCounter';
 import { Button } from '../../components/Button';
 import { ImageLoader } from '../../components/ImageLoader';
+import { Divider } from '../../components/Divider';
 import { useCounter } from '../../hooks/useCounter';
 
 const Container = styled.ScrollView`
@@ -62,12 +63,8 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
       <Container
         // eslint-disable-next-line react-native/no-inline-styles
         contentContainerStyle={{ alignItems: 'center', paddingBottom: 50 }}>
-        <ProductDescription
-          isCentered
-          product={selectedProduct}
-          variantPrice={selectedVariant?.unitPrice}
-        />
         <ProductText>{selectedProduct?.shortDescription}</ProductText>
+        <Divider color={Colors.silver} />
         {selectedProduct?.variantOptions
           .sort((a, b) => a.unitPrice - b.unitPrice)
           .map((variant) => (
@@ -80,6 +77,14 @@ const ProductDetailView: NavigationFunctionComponent<IProps> = memo(
               isActive={variant?.productId === selectedVariant?.productId}
             />
           ))}
+        <Divider color={Colors.silver} />
+        <ProductDescription
+          isCentered
+          product={selectedProduct}
+          variantPrice={selectedVariant?.unitPrice}
+        />
+
+        <Divider color={Colors.silver} />
         <ImageLoader
           height={300}
           width={400}

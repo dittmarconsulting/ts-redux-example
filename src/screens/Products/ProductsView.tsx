@@ -18,6 +18,7 @@ import { ActionCreator } from '../../redux/actions';
 import { IProduct } from '../../types/productTypes';
 import { IProductState } from '../../redux/types/reducers';
 import { ProductCard } from '../../components/ProductCard';
+import { ProductDetail } from '../ProductDetail';
 
 const StyledFlatList = styled.FlatList`
   background-color: ${Colors.silver};
@@ -41,7 +42,7 @@ export const ProductsView: NavigationFunctionComponent<IProps> = memo(
       presetSelectedProduct(product);
       Navigation.push(componentId, {
         component: {
-          name: 'detail',
+          name: ProductDetail.NavigationName,
         },
       });
     };
